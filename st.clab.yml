@@ -47,7 +47,7 @@ topology:
       mgmt-ipv4: 172.80.80.13
       group: leaf
 
-    ### CLIENTS ###
+    ### CLIENTS (Retained) ###
     client1:
       kind: linux
       mgmt-ipv4: 172.80.80.31
@@ -76,6 +76,21 @@ topology:
         - ip -6 address add 2002::172:17:0:3/96 dev eth1
       group: server
 
+    ### KIND CLUSTER 1 (Attached to Leaf 1) ###
+    c1-control-plane: { kind: ext-container }
+    c1-worker:        { kind: ext-container }
+    c1-worker2:       { kind: ext-container }
+
+    ### KIND CLUSTER 2 (Attached to Leaf 2) ###
+    c2-control-plane: { kind: ext-container }
+    c2-worker:        { kind: ext-container }
+    c2-worker2:       { kind: ext-container }
+
+    ### KIND CLUSTER 3 (Attached to Leaf 3) ###
+    c3-control-plane: { kind: ext-container }
+    c3-worker:        { kind: ext-container }
+    c3-worker2:       { kind: ext-container }
+
     ### TELEMETRY STACK ###
     gnmic:
       kind: linux
@@ -84,7 +99,7 @@ topology:
       binds:
         - configs/gnmic/gnmic-config.yml:/gnmic-config.yml:ro
       cmd: --config /gnmic-config.yml --log subscribe
-      group: "10" # group 10 is assigned to the nodes of a telemetry stack
+      group: "10" 
 
     prometheus:
       kind: linux
@@ -109,7 +124,6 @@ topology:
         - 3000:3000
       env:
         GF_INSTALL_PLUGINS: "andrewbmchugh-flow-panel"
-        # env vars to enable anonymous access
         GF_ORG_ROLE: "Admin"
         GF_ORG_NAME: "Main Org"
         GF_AUTH_ANONYMOUS_ENABLED: "true"
@@ -140,12 +154,30 @@ topology:
         - 3100:3100
 
   links:
+    # Spine to Leaf Fabric
     - endpoints: ["spine1:e1-1", "leaf1:e1-49"]
     - endpoints: ["spine1:e1-2", "leaf2:e1-49"]
     - endpoints: ["spine1:e1-3", "leaf3:e1-49"]
     - endpoints: ["spine2:e1-1", "leaf1:e1-50"]
     - endpoints: ["spine2:e1-2", "leaf2:e1-50"]
     - endpoints: ["spine2:e1-3", "leaf3:e1-50"]
+    
+    # Original Clients
     - endpoints: ["leaf1:e1-1", "client1:eth1"]
     - endpoints: ["leaf2:e1-1", "client2:eth1"]
     - endpoints: ["leaf3:e1-1", "client3:eth1"]
+
+    # Kind Cluster 1 Links (Leaf 1)
+    - endpoints: ["leaf1:e1-2", "c1-control-plane:eth1"]
+    - endpoints: ["leaf1:e1-3", "c1-worker:eth1"]
+    - endpoints: ["leaf1:e1-4", "c1-worker2:eth1"]
+
+    # Kind Cluster 2 Links (Leaf 2)
+    - endpoints: ["leaf2:e1-2", "c2-control-plane:eth1"]
+    - endpoints: ["leaf2:e1-3", "c2-worker:eth1"]
+    - endpoints: ["leaf2:e1-4", "c2-worker2:eth1"]
+
+    # Kind Cluster 3 Links (Leaf 3)
+    - endpoints: ["leaf3:e1-2", "c3-control-plane:eth1"]
+    - endpoints: ["leaf3:e1-3", "c3-worker:eth1"]
+    - endpoints: ["leaf3:e1-4", "c3-worker2:eth1"]

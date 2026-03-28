@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rebel-base
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: rebel-base
+  template:
+    metadata:
+      labels:
+        name: rebel-base
+    spec:
+      containers:
+      - name: app
+        image: hashicorp/http-echo:latest
+        args:
+        - "-text=🚀 Greetings from Cluster 2!"
+        - "-listen=:80"
