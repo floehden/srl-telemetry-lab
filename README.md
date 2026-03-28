@@ -1,6 +1,16 @@
 # Nokia SR Linux & Cilium ClusterMesh Telemetry Lab
 
-[][discord-url] [][devpod-url] [][codespaces-url]  
+[![Discord][discord-svg]][discord-url] [![DevPod][devpod-svg]][devpod-url] [![Codespaces][codespaces-svg]][codespaces-url]  
+![w212][w212][Learn more](https://containerlab.dev/macos/#devpod) ![w90][w90][Learn more](https://containerlab.dev/manual/codespaces)
+
+[discord-svg]: https://gitlab.com/rdodin/pics/-/wikis/uploads/b822984bc95d77ba92d50109c66c7afe/join-discord-btn.svg
+[discord-url]: https://discord.gg/tZvgjQ6PZf
+[devpod-svg]: https://gitlab.com/rdodin/pics/-/wikis/uploads/dfc36636ecaa60f3e70340686d5800db/open-in-devpod-btn.svg
+[devpod-url]: https://devpod.sh/open#https://github.com/srl-labs/srl-telemetry-lab
+[codespaces-svg]: https://gitlab.com/rdodin/pics/-/wikis/uploads/80546a8c7cda8bb14aa799d26f55bd83/run-codespaces-btn.svg
+[codespaces-url]: https://codespaces.new/srl-labs/srl-telemetry-lab?quickstart=1&devcontainer_path=.devcontainer%2Fdocker-in-docker%2Fdevcontainer.json
+[w212]: https://gitlab.com/rdodin/pics/-/wikis/uploads/718a32dfa2b375cb07bcac50ae32964a/w212h1.svg
+[w90]: https://gitlab.com/rdodin/pics/-/wikis/uploads/bf1b8ea28b4528eb1b66567355a13c5c/w90h1.svg
 [Learn more](https://containerlab.dev/macos/#devpod) [Learn more](https://containerlab.dev/manual/codespaces)
 
 This lab represents a hybrid infrastructure environment featuring a Clos fabric built with [Nokia SR Linux](https://learn.srlinux.dev/) running Layer 2 EVPN, seamlessly integrating **Legacy Linux Clients** and **Multi-Cluster Kubernetes (Kind)**. The Kubernetes clusters are interconnected using **Cilium ClusterMesh**, enabling cross-cluster pod-to-pod routing and Global Services directly over the EVPN overlay.
@@ -126,14 +136,3 @@ Using the flow plugin and real telemetry data users can create interactive topol
 ### Logging stack
 
 The logging stack leverages the promtail-\>Loki pipeline. The logging infrastructure captures every message from SR Linux that is above the Info level. This includes all BGP messages, system messages, and interface state changes. The Grafana dashboard provides a view on the collected logs and allows filtering on a per-application level.
-
------
-
-[]: #
-[discord-url]: https://www.google.com/search?q=%5Bhttps://discord.gg/tZvgjQ6PZf%5D\(https://discord.gg/tZvgjQ6PZf\)
-[]: #
-[devpod-url]: https://www.google.com/search?q=%5Bhttps://devpod.sh/open%23https://github.com/srl-labs/srl-telemetry-lab%5D\(https://devpod.sh/open%23https://github.com/srl-labs/srl-telemetry-lab\)
-[]: #
-[codespaces-url]: https://www.google.com/search?q=%5Bhttps://codespaces.new/srl-labs/srl-telemetry-lab%3Fquickstart%3D1%26devcontainer_path%3D.devcontainer%252Fdocker-in-docker%252Fdevcontainer.json%5D\(https://codespaces.new/srl-labs/srl-telemetry-lab%3Fquickstart%3D1%26devcontainer_path%3D.devcontainer%252Fdocker-in-docker%252Fdevcontainer.json\)
-[]: #
-[]: #
