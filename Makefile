@@ -37,8 +37,10 @@ mesh:
 	cilium clustermesh enable --context kind-c2 --service-type NodePort
 	cilium clustermesh enable --context kind-c3 --service-type NodePort
 	
-	@echo "⏳ Waiting for ClusterMesh to enable (sleeping for 30s)..."
-	sleep 30
+	@echo "⏳ Waiting for ClusterMesh apiservers to be ready..."
+	cilium clustermesh status --context kind-c1 --wait
+	cilium clustermesh status --context kind-c2 --wait
+	cilium clustermesh status --context kind-c3 --wait
 	
 	# 2. Connect the clusters together
 	cilium clustermesh connect --context kind-c1 --destination-context kind-c2 --allow-mismatching-ca
